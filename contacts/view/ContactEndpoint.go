@@ -1,7 +1,7 @@
 package view
 
 import (
-	"code-on-demand-go/contacts/application"
+	"code-on-demand-go/contacts/domain"
 	"github.com/gin-gonic/gin"
 )
 
@@ -9,16 +9,16 @@ type ContactHandler interface {
 }
 
 type contactHandler struct {
-	service application.ContactFacade
+	contact domain.Contact
 }
 
-func NewContactHandler(service application.ContactFacade) *contactHandler {
+func NewContactHandler(contact domain.Contact) *contactHandler {
 	return &contactHandler{
-		service: service,
+		contact: contact,
 	}
 }
 
-func (contactHandler *contactHandler) FindAll(c *gin.Context) {
-	contacts := contactHandler.service.FindAll()
+func (contact contactHandler) FindAll(c *gin.Context) {
+	contacts := contact.contact.FindAll().OnlyActive()
 	c.JSON(200, contacts)
 }

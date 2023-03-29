@@ -1,8 +1,8 @@
 package view
 
 import (
-	"code-on-demand-go/contacts/application"
 	"code-on-demand-go/contacts/domain"
+	"code-on-demand-go/contacts/infrastructure"
 	"github.com/gin-gonic/gin"
 )
 
@@ -12,8 +12,9 @@ type contactRoute struct {
 }
 
 func NewContactRoutes(engineParam *gin.Engine) *contactRoute {
+
 	return &contactRoute{
-		handler: *NewContactHandler(application.ContactFacade(domain.NewContactRepository())),
+		handler: *NewContactHandler(domain.NewContact(infrastructure.NewContactRepository())),
 		engine:  engineParam,
 	}
 }
