@@ -2,6 +2,7 @@ package view
 
 import (
 	"code-on-demand-go/contacts/domain"
+	"code-on-demand-go/contacts/view/support"
 	"github.com/gin-gonic/gin"
 	"github.com/nvellon/hal"
 	"strconv"
@@ -23,7 +24,7 @@ type ContactResource struct {
 func (resource ContactResource) newContactResource(contact *domain.Contact) ContactResource {
 	return ContactResource{
 		Id:     contact.Id,
-		Mobile: contact.Mobile,
+		Mobile: support.MaskData(contact.Mobile),
 		Status: contact.Status,
 	}
 }

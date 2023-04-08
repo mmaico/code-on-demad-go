@@ -20,5 +20,6 @@ func NewContactRoutes(engineParam *gin.Engine) *contactRoute {
 }
 
 func (route contactRoute) ContactRoutes() {
+
 	route.engine.GET("/customers/contacts", route.handler.FindAll)
 }
